@@ -1,8 +1,7 @@
+__path = process.cwd()
+
 var express = require('express'); 
 var app = express();
-var createError = require('http-errors');
-var favicon = require('serve-favicon');
-var path = require('path');
 var cookieParser = require('cookie-parser');
 
 //
@@ -18,7 +17,11 @@ app.set("json spaces",2)
 app.use(cors())
 app.use(secure)
 app.use(cookieParser());
-app.use(express.static("assets"))
+app.use(express.static())
+
+app.get('/', (req, res) => {
+    res.sendFile(__path + '/index.html')
+})
   
 // App listen (port)
 app.listen(PORT, () => {
